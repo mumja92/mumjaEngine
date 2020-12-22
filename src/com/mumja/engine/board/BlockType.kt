@@ -1,4 +1,4 @@
-package com.mumja.mumjaengine.board
+package com.mumja.engine.board
 
 enum class BlockType {
     EMPTY,

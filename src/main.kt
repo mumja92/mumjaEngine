@@ -1,7 +1,7 @@
-import com.mumja.mumjaengine.MumjaEngine
+import com.mumja.engine.Engine
 
 
 fun main(){
-    var engine =  MumjaEngine()
-    print("XDDD")
+    var engine =  Engine()
+    engine.play()
 }
