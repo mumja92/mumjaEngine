@@ -1,7 +1,7 @@
-import com.mumja.engine.Engine
+import com.mumja.tetris.Tetris
 
 
 fun main(){
-    var engine =  Engine()
-    engine.play()
+    val tetris =  Tetris()
+    tetris.play()
 }

@@ -1,4 +1,16 @@
-package com.mumja.engine.board
+package com.mumja.tetris.board
+
+/*
+Board coordinates: (1,3)
+0----------->sizeY
+| o o o o o o
+| o o o X o o
+| o o o o o o
+| o o o o o o
+| o o o o o o
+\/
+sizeX
+ */
 
 class Board (
     var sizeX: Int,

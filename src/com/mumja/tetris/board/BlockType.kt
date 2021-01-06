@@ -1,4 +1,4 @@
-package com.mumja.engine.board
+package com.mumja.tetris.board
 
 enum class BlockType {
     EMPTY,
