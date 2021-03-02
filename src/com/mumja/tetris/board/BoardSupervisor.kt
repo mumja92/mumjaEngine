@@ -17,25 +17,21 @@ class BoardSupervisor {
     }
 
     private fun moveUserBlock(input: InputCommand){
-        userBlockPositionX++
-        if (userBlockPositionX >= boardSizeX){
-            sealUserBlock()
-            userBlockPositionX = 0
-            userBlockPositionY = boardSizeY/2
-        }
-        when(input){
+        moveUserBlockDown()
+        when (input) {
             InputCommand.LEFT -> {
                 if (userBlockPositionY > 0) userBlockPositionY--
             }
             InputCommand.RIGHT -> {
                 if (userBlockPositionY < boardSizeY - 1) userBlockPositionY++
             }
-            else ->{
+            else -> {
             }
         }
     }
 
     private fun sealUserBlock(){
+        board.setLocation(userBlockPositionX, userBlockPositionY, Block(BlockType.POINT))
     }
 
     private fun drawUserBlock(){
@@ -44,5 +40,26 @@ class BoardSupervisor {
 
     private fun unDrawUserBlock(){
         board.setLocation(userBlockPositionX, userBlockPositionY, Block(BlockType.EMPTY))
+    }
+
+    private fun checkUserBlockCanMoveDown(): Boolean{
+        val block = board.getLocation(userBlockPositionX+1, userBlockPositionY)
+        if (block != null) {
+            if (block.blockType == BlockType.EMPTY){
+                return true
+            }
+        }
+        return false
+    }
+
+    private fun moveUserBlockDown(){
+        if (!checkUserBlockCanMoveDown()){
+            sealUserBlock()
+            userBlockPositionX = 0
+            userBlockPositionY = boardSizeY/2
+        }
+        else{
+            userBlockPositionX++
+        }
     }
 }
