@@ -28,7 +28,6 @@ class BoardDrawerCli {
         drawLastLineOfBoard(board.sizeX)
     }
     private fun drawFirstLineOfBoard(size: Int){
-        print(" ")
         for (i in 1..size){
             print("-")
         }
