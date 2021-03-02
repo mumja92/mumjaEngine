@@ -6,4 +6,5 @@ enum class InputCommand {
     LEFT,
     RIGHT,
     SPEED,
+    ROTATE,
 }
