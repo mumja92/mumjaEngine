@@ -1,6 +1,7 @@
 package com.mumja.tetris
 
 class Timer {
-    fun handleTime(){
+    fun handleTime() : Boolean{
+        return true
     }
 }

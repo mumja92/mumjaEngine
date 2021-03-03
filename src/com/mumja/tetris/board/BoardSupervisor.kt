@@ -10,16 +10,18 @@ class BoardSupervisor {
     private var userBlockPositionX = 0
     private var userBlockPositionY = boardSizeY/2
 
-    fun nextFrame(input: InputCommand): Board{
+    fun nextFrame(input: InputCommand, nextTick: Boolean = true): Board{
         unDrawUserBlock()
         removeFullLines()
-        moveUserBlock(input)
+        moveUserBlock(input, nextTick)
         drawUserBlock()
         return board;
     }
 
-    private fun moveUserBlock(input: InputCommand){
-        moveUserBlockDown()
+    private fun moveUserBlock(input: InputCommand, nextTick:Boolean){
+        if (nextTick){
+            moveUserBlockDown()
+        }
         when (input) {
             InputCommand.LEFT -> {
                 if (userBlockPositionY > 0) userBlockPositionY--

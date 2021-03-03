@@ -18,7 +18,8 @@ class Tetris {
     fun play(){
         var board: Board
         var input: InputCommand
-        boardDrawer.draw(boardSupervisor.nextFrame(InputCommand.NONE))
+        var nextTick = true
+        boardDrawer.draw(boardSupervisor.nextFrame(InputCommand.NONE, false))
         while(true){
             input = inputParser.getInput()
             if (input == InputCommand.EXIT){
@@ -26,9 +27,9 @@ class Tetris {
                 break
             }
             try {
-                board = boardSupervisor.nextFrame(input)
+                board = boardSupervisor.nextFrame(input, nextTick)
                 boardDrawer.draw(board)
-                timer.handleTime()
+                nextTick = timer.handleTime()
             }
             catch (e: GameOverException){
                 callGameOver()
