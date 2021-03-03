@@ -1,19 +1,24 @@
 package com.mumja.tetris
 
 import com.mumja.tetris.board.Board
-import com.mumja.tetris.board.BoardDrawerCli
+import com.mumja.tetris.board.drawers.BoardDrawerCli
 import com.mumja.tetris.board.BoardSupervisor
-import java.sql.Time
+import com.mumja.tetris.board.drawers.IBoardDrawer
 
 class Tetris {
     private val boardSupervisor = BoardSupervisor()
-    private val boardDrawerCli = BoardDrawerCli()
+    private val boardDrawer : IBoardDrawer
     private val inputParser = InputParser()
     private val timer = Timer()
+
+    init{
+        boardDrawer = BoardDrawerCli()
+    }
+
     fun play(){
         var board: Board
         var input: InputCommand
-        boardDrawerCli.draw(boardSupervisor.nextFrame(InputCommand.NONE))
+        boardDrawer.draw(boardSupervisor.nextFrame(InputCommand.NONE))
         while(true){
             input = inputParser.getInput()
             if (input == InputCommand.EXIT){
@@ -22,7 +27,7 @@ class Tetris {
             }
             try {
                 board = boardSupervisor.nextFrame(input)
-                boardDrawerCli.draw(board)
+                boardDrawer.draw(board)
                 timer.handleTime()
             }
             catch (e: GameOverException){
@@ -33,10 +38,11 @@ class Tetris {
     }
 
     private fun callExit(){
+        callGameOver()
     }
 
     private fun callGameOver()
     {
-        boardDrawerCli.gameOver()
+        boardDrawer.gameOver()
     }
 }

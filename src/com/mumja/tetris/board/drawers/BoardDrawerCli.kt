@@ -1,12 +1,15 @@
-package com.mumja.tetris.board
+package com.mumja.tetris.board.drawers
 
-class BoardDrawerCli {
-    fun draw(board: Board){
+import com.mumja.tetris.board.BlockType
+import com.mumja.tetris.board.Board
+
+class BoardDrawerCli : IBoardDrawer {
+    override fun draw(board: Board){
         clearScreen()
         drawBoard(board)
     }
 
-    fun gameOver(){
+    override fun gameOver(){
         println("Game over")
     }
 
