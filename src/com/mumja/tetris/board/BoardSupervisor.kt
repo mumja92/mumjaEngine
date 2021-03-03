@@ -3,14 +3,15 @@ package com.mumja.tetris.board
 import com.mumja.tetris.InputCommand
 
 class BoardSupervisor {
-    private val boardSizeX = 12
-    private val boardSizeY = 10
+    private val boardSizeX = 4
+    private val boardSizeY = 3
     private val board = Board(boardSizeX, boardSizeY)
     private var userBlockPositionX = 0
     private var userBlockPositionY = boardSizeY/2
 
     fun nextFrame(input: InputCommand): Board{
         unDrawUserBlock()
+        removeFullLines()
         moveUserBlock(input)
         drawUserBlock()
         return board;
@@ -60,6 +61,34 @@ class BoardSupervisor {
         }
         else{
             userBlockPositionX++
+        }
+    }
+
+    private fun removeFullLines(){
+        while (true){
+            if (lastLineIsFull()){
+                moveBoardOneLineDown()
+            }
+            else{
+                break
+            }
+        }
+    }
+
+    private fun lastLineIsFull(): Boolean{
+        for (i in 0 until boardSizeY){
+            if (board.getLocation(boardSizeX-1, i)!!.blockType == BlockType.EMPTY){
+                return false
+            }
+        }
+        return true
+    }
+
+    private fun moveBoardOneLineDown(){
+        for (i in boardSizeX - 2 downTo 0){
+            for (j in 0 until boardSizeY){
+                board.setLocation(i+1, j, board.getLocation(i, j)!!)
+            }
         }
     }
 }
