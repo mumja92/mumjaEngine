@@ -1,5 +1,6 @@
 package com.mumja.tetris.board
 
+import com.mumja.tetris.GameOverException
 import com.mumja.tetris.InputCommand
 
 class BoardSupervisor {
@@ -58,6 +59,9 @@ class BoardSupervisor {
             sealUserBlock()
             userBlockPositionX = 0
             userBlockPositionY = boardSizeY/2
+            if (board.getLocation(userBlockPositionX, userBlockPositionY)!!.blockType != BlockType.EMPTY){
+                throw GameOverException()
+            }
         }
         else{
             userBlockPositionX++

@@ -20,12 +20,23 @@ class Tetris {
                 callExit()
                 break
             }
-            board = boardSupervisor.nextFrame(input)
-            boardDrawerCli.draw(board)
-            timer.handleTime()
+            try {
+                board = boardSupervisor.nextFrame(input)
+                boardDrawerCli.draw(board)
+                timer.handleTime()
+            }
+            catch (e: GameOverException){
+                callGameOver()
+                break
+            }
         }
     }
 
     private fun callExit(){
+    }
+
+    private fun callGameOver()
+    {
+        boardDrawerCli.gameOver()
     }
 }

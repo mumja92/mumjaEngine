@@ -6,6 +6,10 @@ class BoardDrawerCli {
         drawBoard(board)
     }
 
+    fun gameOver(){
+        println("Game over")
+    }
+
     private fun clearScreen(){
         for (i in 1..20){
             println()
@@ -13,7 +17,7 @@ class BoardDrawerCli {
     }
 
     private fun drawBoard(board: Board){
-        drawFirstLineOfBoard(board.sizeX)
+        drawFirstLineOfBoard(board.sizeY)
         for (x  in 0 until board.sizeX){
             var line = String()
             for (y in 0 until board.sizeY){
@@ -25,10 +29,10 @@ class BoardDrawerCli {
             }
             drawMiddleLineOfBoard(line)
         }
-        drawLastLineOfBoard(board.sizeX)
+        drawLastLineOfBoard(board.sizeY)
     }
     private fun drawFirstLineOfBoard(size: Int){
-        for (i in 1..size){
+        for (i in 0 until size + 2){
             print("-")
         }
         println(" ")
