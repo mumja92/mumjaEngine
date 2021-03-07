@@ -24,10 +24,14 @@ class BoardSupervisor {
         }
         when (input) {
             InputCommand.LEFT -> {
-                if (userBlockPositionY > 0) userBlockPositionY--
+                if (checkUserBlockCanMove(userBlockPositionX, userBlockPositionY-1)){
+                    userBlockPositionY--
+                }
             }
             InputCommand.RIGHT -> {
-                if (userBlockPositionY < boardSizeY - 1) userBlockPositionY++
+                if (checkUserBlockCanMove(userBlockPositionX, userBlockPositionY+1)){
+                    userBlockPositionY++
+                }
             }
             else -> {
             }
@@ -46,18 +50,9 @@ class BoardSupervisor {
         board.setLocation(userBlockPositionX, userBlockPositionY, Block(BlockType.EMPTY))
     }
 
-    private fun checkUserBlockCanMoveDown(): Boolean{
-        val block = board.getLocation(userBlockPositionX+1, userBlockPositionY)
-        if (block != null) {
-            if (block.blockType == BlockType.EMPTY){
-                return true
-            }
-        }
-        return false
-    }
 
     private fun moveUserBlockDown(){
-        if (!checkUserBlockCanMoveDown()){
+        if (!checkUserBlockCanMove(userBlockPositionX+1, userBlockPositionY)){
             sealUserBlock()
             userBlockPositionX = 0
             userBlockPositionY = boardSizeY/2
@@ -68,6 +63,16 @@ class BoardSupervisor {
         else{
             userBlockPositionX++
         }
+    }
+
+    private fun checkUserBlockCanMove(targetX: Int, targetY: Int): Boolean{
+        val block = board.getLocation(targetX, targetY)
+        if (block != null) {
+            if (block.blockType == BlockType.EMPTY){
+                return true
+            }
+        }
+        return false
     }
 
     private fun removeFullLines(){
