@@ -34,9 +34,7 @@ class BoardSupervisor {
                 }
             }
             InputCommand.SPEED -> {
-                if (checkUserBlockCanMove(userBlockPositionX, userBlockPositionY+1)){
-                    moveUserBlockDown()
-                }
+                moveUserBlockDown()
             }
             else -> {
             }
