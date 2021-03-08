@@ -1,12 +1,14 @@
 package com.mumja.tetris
 
-class Timer(periodMs: Int = 2000) {
-    private var period = periodMs
+class Timer(
+    var periodMs: Int,
+    var refreshMs: Long,
+    ) {
     private var startTime: Long = System.currentTimeMillis()
     fun handleTime() : Boolean{
-        Thread.sleep(10)
+        Thread.sleep(refreshMs)
         val currentTime = System.currentTimeMillis()
-        if (currentTime - startTime > period){
+        if (currentTime - startTime > periodMs){
             startTime = System.currentTimeMillis()
             return true
         }

@@ -1,14 +1,14 @@
 package com.mumja.tetris.board.drawers
 
 import com.mumja.tetris.board.Board
-import com.mumja.tetris.board.drawers.swing.Block
+import com.mumja.tetris.board.drawers.swing.TetrisBoardComponent
 import javax.swing.JFrame
 import java.awt.Dimension
 
 
 class BoardDrawerSwing: IBoardDrawer {
     private val frame = JFrame("Mumjotetris")
-    private val block = Block()
+    private val block = TetrisBoardComponent()
 
     init{
         frame.minimumSize = Dimension(800, 400)

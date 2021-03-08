@@ -1,7 +1,7 @@
 package com.mumja.tetris.board
 
 import com.mumja.tetris.GameOverException
-import com.mumja.tetris.InputCommand
+import com.mumja.tetris.input.InputCommand
 
 class BoardSupervisor {
     private val boardSizeX = 4

@@ -44,9 +44,6 @@ class Board (
         return null
     }
 
-    fun getBoard(): Array<Array<Block>>{
-        return matrix
-    }
     private fun inRange(x: Int, y: Int): Boolean{
         if (x < 0 || x >= sizeX || y < 0 || y >= sizeY){
             return false

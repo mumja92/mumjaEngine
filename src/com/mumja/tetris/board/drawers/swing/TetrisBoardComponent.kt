@@ -7,7 +7,7 @@ import java.awt.Color
 import javax.swing.JComponent
 
 
-internal class Block : JComponent() {
+internal class TetrisBoardComponent : JComponent() {
     private var board: Board? = null
     private val sizeX = 40
     private val sizeY = 40
