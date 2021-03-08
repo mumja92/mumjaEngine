@@ -9,11 +9,15 @@ import com.mumja.tetris.input.*
 
 class Tetris {
     private val boardSupervisor = BoardSupervisor()
-    private var boardDrawer : IBoardDrawer = BoardDrawerCli()
-    private var inputParser : IInputParser = InputParserCli()
-    private var timer = Timer(1000, 1000)
+    private var boardDrawer : IBoardDrawer? = null
+    private var inputParser : IInputParser? = null
+    private var timer = Timer(1000)
 
+    // Deprecated and unplayable. Please fix or don't use
     fun playCli(){
+        timer.refreshMs=1000
+        boardDrawer = BoardDrawerCli()
+        inputParser = InputParserCli()
         play()
     }
 
@@ -28,16 +32,16 @@ class Tetris {
         var board: Board
         var input: InputCommand
         var nextTick = true
-        boardDrawer.draw(boardSupervisor.nextFrame(InputCommand.NONE, false))
+        boardDrawer!!.draw(boardSupervisor.nextFrame(InputCommand.NONE, false))
         while(true){
             try {
-                input = inputParser.getInput()
+                input = inputParser!!.getInput()
                 if (input == InputCommand.EXIT){
                     callGameOver()
                     break
                 }
                 board = boardSupervisor.nextFrame(input, nextTick)
-                boardDrawer.draw(board)
+                boardDrawer!!.draw(board)
                 nextTick = timer.handleTime()
             }
             catch (e: GameOverException){
@@ -49,6 +53,6 @@ class Tetris {
 
     private fun callGameOver()
     {
-        boardDrawer.gameOver()
+        boardDrawer!!.gameOver()
     }
 }

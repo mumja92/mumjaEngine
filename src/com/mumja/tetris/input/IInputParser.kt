@@ -1,9 +1,7 @@
 package com.mumja.tetris.input
 
 interface IInputParser {
-
     fun getInput(): InputCommand
-
 
     fun parseInput(userInput : String) : InputCommand {
         return try{

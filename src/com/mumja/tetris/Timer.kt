@@ -2,7 +2,7 @@ package com.mumja.tetris
 
 class Timer(
     var periodMs: Int,
-    var refreshMs: Long,
+    var refreshMs: Long = 100,
     ) {
     private var startTime: Long = System.currentTimeMillis()
     fun handleTime() : Boolean{
