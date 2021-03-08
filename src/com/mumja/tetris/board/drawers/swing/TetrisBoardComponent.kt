@@ -21,11 +21,11 @@ internal class TetrisBoardComponent : JComponent() {
             for (x in 0 until board!!.sizeX) {
                 for (y in 0 until board!!.sizeY) {
                     val block = board!!.getLocation(x, y)
-                    g.color = Color.BLUE
+                    var color = Color.BLUE
                     if (block!!.blockType != BlockType.EMPTY) {
-                        g.color = Color.RED;
+                        color = Color.RED;
                     }
-                    g.fillRect(y*sizeY, x*sizeX, sizeY, sizeX);
+                    BlockDrawingScheme.drawRectangle(g, color, y*sizeY, x*sizeX, sizeY, sizeX)
                 }
             }
         }
