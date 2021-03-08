@@ -9,21 +9,16 @@ import com.mumja.tetris.input.*
 
 class Tetris {
     private val boardSupervisor = BoardSupervisor()
-    private var boardDrawer : IBoardDrawer
-    private var inputParser : IInputParser
-    private var timer = Timer(1000, 10)
-
-    init{
-        boardDrawer = BoardDrawerCli()
-        inputParser = InputParserCli()
-    }
+    private var boardDrawer : IBoardDrawer = BoardDrawerCli()
+    private var inputParser : IInputParser = InputParserCli()
+    private var timer = Timer(1000, 1000)
 
     fun playCli(){
-        timer.refreshMs=1000
         play()
     }
 
     fun playSwing(){
+        timer.refreshMs=10
         boardDrawer = BoardDrawerSwing()
         inputParser = InputParserAWT()
         play()
