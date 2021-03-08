@@ -4,6 +4,7 @@ import com.mumja.tetris.board.Board
 import com.mumja.tetris.board.drawers.swing.TetrisBoardComponent
 import javax.swing.JFrame
 import java.awt.Dimension
+import javax.swing.JOptionPane
 
 
 class BoardDrawerSwing: IBoardDrawer {
@@ -23,7 +24,7 @@ class BoardDrawerSwing: IBoardDrawer {
     }
 
     override fun gameOver() {
-        frame.isVisible = false
+        JOptionPane.showMessageDialog(null, "GG medium", "Game Over", JOptionPane.INFORMATION_MESSAGE);
         frame.dispose()
     }
 
