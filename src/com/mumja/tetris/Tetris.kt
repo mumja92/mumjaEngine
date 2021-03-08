@@ -3,6 +3,7 @@ package com.mumja.tetris
 import com.mumja.tetris.board.Board
 import com.mumja.tetris.board.drawers.BoardDrawerCli
 import com.mumja.tetris.board.BoardSupervisor
+import com.mumja.tetris.board.drawers.BoardDrawerSwing
 import com.mumja.tetris.board.drawers.IBoardDrawer
 
 class Tetris {
@@ -12,7 +13,7 @@ class Tetris {
     private val timer = Timer()
 
     init{
-        boardDrawer = BoardDrawerCli()
+        boardDrawer = BoardDrawerSwing()
     }
 
     fun play(){
@@ -21,12 +22,12 @@ class Tetris {
         var nextTick = true
         boardDrawer.draw(boardSupervisor.nextFrame(InputCommand.NONE, false))
         while(true){
-            input = inputParser.getInput()
-            if (input == InputCommand.EXIT){
-                callExit()
-                break
-            }
             try {
+                input = inputParser.getAWTInput()
+                if (input == InputCommand.EXIT){
+                    callExit()
+                    break
+                }
                 board = boardSupervisor.nextFrame(input, nextTick)
                 boardDrawer.draw(board)
                 nextTick = timer.handleTime()

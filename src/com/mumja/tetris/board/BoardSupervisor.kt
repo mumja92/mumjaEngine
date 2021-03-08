@@ -39,6 +39,9 @@ class BoardSupervisor {
     }
 
     private fun sealUserBlock(){
+        if (userBlockPositionX == 0){
+            throw GameOverException()
+        }
         board.setLocation(userBlockPositionX, userBlockPositionY, Block(BlockType.POINT))
     }
 
@@ -56,9 +59,6 @@ class BoardSupervisor {
             sealUserBlock()
             userBlockPositionX = 0
             userBlockPositionY = boardSizeY/2
-            if (board.getLocation(userBlockPositionX, userBlockPositionY)!!.blockType != BlockType.EMPTY){
-                throw GameOverException()
-            }
         }
         else{
             userBlockPositionX++
