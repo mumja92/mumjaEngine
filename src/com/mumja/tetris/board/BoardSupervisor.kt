@@ -104,29 +104,26 @@ class BoardSupervisor {
     }
 
     private fun removeFullLines(){
-        while (true){
-            if (lastLineIsFull()){
-                moveBoardOneLineDown()
-            }
-            else{
-                break
+        for (i in 1 until boardSizeX){
+            if (lineIsFull(i)){
+                moveBoardOneLineDown(i)
             }
         }
     }
 
-    private fun lastLineIsFull(): Boolean{
+    private fun lineIsFull(lineIndex: Int): Boolean{
         for (i in 0 until boardSizeY){
-            if (board.getLocation(boardSizeX-1, i)!!.blockType == BlockType.EMPTY){
+            if (board.getLocation(lineIndex, i)!!.blockType == BlockType.EMPTY){
                 return false
             }
         }
         return true
     }
 
-    private fun moveBoardOneLineDown(){
-        for (i in boardSizeX - 2 downTo 0){
+    private fun moveBoardOneLineDown(startIndex: Int){
+        for (i in startIndex downTo 1){
             for (j in 0 until boardSizeY){
-                board.setLocation(i+1, j, board.getLocation(i, j)!!)
+                board.setLocation(i, j, board.getLocation(i-1, j)!!)
             }
         }
     }

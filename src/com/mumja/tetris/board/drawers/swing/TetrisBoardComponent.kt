@@ -41,6 +41,7 @@ internal class TetrisBoardComponent : JComponent() {
     private fun drawStatus(g: Graphics, shift: Int){
         g.drawString("Move: Left/Right", shift + 10, 20)
         g.drawString("Speed: Down", shift + 10, 40)
-        g.drawString("Exit: ESC", shift + 10, 60)
+        g.drawString("Rotate: R", shift + 10, 60)
+        g.drawString("Exit: ESC", shift + 10, 80)
     }
 }

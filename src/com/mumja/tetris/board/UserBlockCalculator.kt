@@ -7,7 +7,7 @@ class UserBlockCalculator {
                 getBlockI(block.blockRotation)
             }
             else ->{
-                getBlockEMPTY(block.blockRotation)
+                getBlockEMPTY()
             }
         }
     }
@@ -40,13 +40,12 @@ class UserBlockCalculator {
                 blockList.add(Pair(2,0))
             }
             else -> {
-
             }
         }
         return blockList
     }
 
-    private fun getBlockEMPTY(rotation: Int): ArrayList<Pair<Int,Int>>{
+    private fun getBlockEMPTY(): ArrayList<Pair<Int,Int>>{
         return ArrayList()
     }
 }
