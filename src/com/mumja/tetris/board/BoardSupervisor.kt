@@ -4,11 +4,17 @@ import com.mumja.tetris.GameOverException
 import com.mumja.tetris.input.InputCommand
 
 class BoardSupervisor {
-    private val boardSizeX = 4
-    private val boardSizeY = 3
+    private val boardSizeX = 15
+    private val boardSizeY = 10
     private val board = Board(boardSizeX, boardSizeY)
+    private var userBlock = Block(BlockType.EMPTY)
     private var userBlockPositionX = 0
-    private var userBlockPositionY = boardSizeY/2
+    private var userBlockPositionY = 0
+    private val userBlockCalculator = UserBlockCalculator()
+
+    init {
+        generateNewUserBlock()
+    }
 
     fun nextFrame(input: InputCommand, nextTick: Boolean = true): Board{
         unDrawUserBlock()
@@ -36,6 +42,14 @@ class BoardSupervisor {
             InputCommand.SPEED -> {
                 moveUserBlockDown()
             }
+            InputCommand.ROTATE -> {
+                if (isRotatePossible()){
+                    userBlock.rotate()
+                }
+            }
+            InputCommand.EXIT -> {
+                throw GameOverException()
+            }
             else -> {
             }
         }
@@ -45,23 +59,29 @@ class BoardSupervisor {
         if (userBlockPositionX == 0){
             throw GameOverException()
         }
-        board.setLocation(userBlockPositionX, userBlockPositionY, Block(BlockType.POINT))
+        for (point in userBlockCalculator.getBlocks(userBlock)){
+            board.setLocation(userBlockPositionX + point.first, userBlockPositionY + point.second, Block(BlockType.POINT))
+        }
     }
 
     private fun drawUserBlock(){
-        board.setLocation(userBlockPositionX, userBlockPositionY, Block(BlockType.POINT))
+        val points = userBlockCalculator.getBlocks(userBlock)
+        for (point in points){
+            board.setLocation(userBlockPositionX + point.first, userBlockPositionY + point.second, Block(BlockType.POINT))
+        }
     }
 
     private fun unDrawUserBlock(){
-        board.setLocation(userBlockPositionX, userBlockPositionY, Block(BlockType.EMPTY))
+        for (point in userBlockCalculator.getBlocks(userBlock)){
+            board.setLocation(userBlockPositionX + point.first, userBlockPositionY + point.second, Block(BlockType.EMPTY))
+        }
     }
 
 
     private fun moveUserBlockDown(){
         if (!checkUserBlockCanMove(userBlockPositionX+1, userBlockPositionY)){
             sealUserBlock()
-            userBlockPositionX = 0
-            userBlockPositionY = boardSizeY/2
+            generateNewUserBlock()
         }
         else{
             userBlockPositionX++
@@ -69,13 +89,18 @@ class BoardSupervisor {
     }
 
     private fun checkUserBlockCanMove(targetX: Int, targetY: Int): Boolean{
-        val block = board.getLocation(targetX, targetY)
-        if (block != null) {
-            if (block.blockType == BlockType.EMPTY){
-                return true
+        for (point in userBlockCalculator.getBlocks(userBlock)){
+            val block = board.getLocation(targetX + point.first, targetY + point.second)
+            if (block == null){
+                return false
+            }
+            else {
+                if (block.blockType != BlockType.EMPTY){
+                    return false
+                }
             }
         }
-        return false
+        return true
     }
 
     private fun removeFullLines(){
@@ -104,5 +129,23 @@ class BoardSupervisor {
                 board.setLocation(i+1, j, board.getLocation(i, j)!!)
             }
         }
+    }
+
+    private fun generateNewUserBlock(){
+        userBlock = Block(BlockType.I, 0)
+        userBlockPositionX = 0
+        userBlockPositionY = boardSizeY/2
+    }
+
+    private fun isRotatePossible(): Boolean{
+        val rotatedBlock = Block(userBlock.blockType, userBlock.blockRotation)
+        rotatedBlock.rotate()
+        for (point in userBlockCalculator.getBlocks(rotatedBlock)){
+            val block = board.getLocation(userBlockPositionX + point.first, userBlockPositionY + point.second) ?: return false
+            if (block.blockType != BlockType.EMPTY){
+                return false
+            }
+        }
+        return true
     }
 }

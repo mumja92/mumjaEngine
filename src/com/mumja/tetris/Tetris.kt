@@ -36,10 +36,6 @@ class Tetris {
         while(true){
             try {
                 input = inputParser!!.getInput()
-                if (input == InputCommand.EXIT){
-                    callGameOver()
-                    break
-                }
                 board = boardSupervisor.nextFrame(input, nextTick)
                 boardDrawer!!.draw(board)
                 nextTick = timer.handleTime()
