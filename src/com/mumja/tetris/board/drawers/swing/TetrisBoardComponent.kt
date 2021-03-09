@@ -5,6 +5,12 @@ import com.mumja.tetris.board.Board
 import java.awt.Graphics
 import java.awt.Color
 import javax.swing.JComponent
+import java.awt.Font
+
+import java.awt.Graphics2D
+
+
+
 
 
 internal class TetrisBoardComponent : JComponent() {
@@ -28,6 +34,12 @@ internal class TetrisBoardComponent : JComponent() {
                     BlockDrawingScheme.drawRectangle(g, color, y*sizeY, x*sizeX, sizeY, sizeX)
                 }
             }
+            drawStatus(g,board!!.sizeY*sizeY)
         }
+    }
+
+    private fun drawStatus(g: Graphics, shift: Int){
+        g.drawString("Move: Left/Right", shift + 10, 20)
+        g.drawString("Speed: Down", shift + 10, 40)
     }
 }

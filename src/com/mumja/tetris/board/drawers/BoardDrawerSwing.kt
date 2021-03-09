@@ -12,7 +12,7 @@ class BoardDrawerSwing: IBoardDrawer {
     private val block = TetrisBoardComponent()
 
     init{
-        frame.minimumSize = Dimension(800, 400)
+        frame.minimumSize = Dimension(800, 1000)
         frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
         frame.isVisible = true;
         frame.add(block)
