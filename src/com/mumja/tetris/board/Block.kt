@@ -10,10 +10,10 @@ class Block (
 
     init {
         if (blockRotation < 0){
-            blockRotation = 0
+            blockRotation = (0..3).random()
         }
         if (blockRotation > 3){
-            blockRotation = 3
+            blockRotation = (0..3).random()
         }
     }
     fun rotate(){
