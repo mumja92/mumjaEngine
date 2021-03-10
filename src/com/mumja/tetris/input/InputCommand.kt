@@ -1,10 +1,11 @@
 package com.mumja.tetris.input
 
 enum class InputCommand {
-    NONE,
     EXIT,
     LEFT,
+    MOVE_DOWN,
+    NONE,
     RIGHT,
-    SPEED,
     ROTATE,
+    SPEED,
 }

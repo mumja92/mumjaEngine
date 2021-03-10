@@ -11,6 +11,7 @@ interface IInputParser {
                 'd' -> InputCommand.RIGHT
                 's' -> InputCommand.SPEED
                 'r' -> InputCommand.ROTATE
+                'w' -> InputCommand.MOVE_DOWN
                 else -> {
                     InputCommand.NONE
                 }

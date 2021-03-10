@@ -39,6 +39,11 @@ class InputParserAWT: IInputParser{
                         asyncInput = "q"
                     }
                 }
+                if (evt.id == KeyEvent.KEY_PRESSED && evt.keyCode == KeyEvent.VK_UP) {
+                    if (asyncInput == null){
+                        asyncInput = "w"
+                    }
+                }
             } catch (e: Exception) {
                 e.printStackTrace()
             }

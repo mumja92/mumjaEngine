@@ -2,16 +2,9 @@ package com.mumja.tetris.board.drawers.swing
 
 import com.mumja.tetris.GameStatus
 import com.mumja.tetris.board.BlockType
-import com.mumja.tetris.board.Board
 import java.awt.Graphics
 import java.awt.Color
 import javax.swing.JComponent
-import java.awt.Font
-
-import java.awt.Graphics2D
-
-
-
 
 
 internal class TetrisBoardComponent : JComponent() {
@@ -40,10 +33,11 @@ internal class TetrisBoardComponent : JComponent() {
     }
 
     private fun drawStatus(g: Graphics, shift: Int){
-        g.drawString("Move: Left/Right", shift + 10, 20)
-        g.drawString("Speed: Down", shift + 10, 40)
-        g.drawString("Rotate: R", shift + 10, 60)
-        g.drawString("Exit: ESC", shift + 10, 80)
+        g.drawString("Move: ←/→", shift + 10, 20)
+        g.drawString("Speed: ↓", shift + 10, 40)
+        g.drawString("Move down: ↑", shift + 10, 60)
+        g.drawString("Rotate: R", shift + 10, 80)
+        g.drawString("Exit: ESC", shift + 10, 100)
 
         g.drawString("Score: ${gameStatus!!.score}", shift + 10, 180)
         g.drawString("Next block: ${gameStatus!!.nextBlock.blockType}", shift + 10, 200)

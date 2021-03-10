@@ -39,7 +39,7 @@ class BoardSupervisor {
 
     private fun moveUserBlock(input: InputCommand, nextTick:Boolean){
         if (nextTick){
-            moveUserBlockDown()
+            moveUserBlockOneLineDown()
         }
         when (input) {
             InputCommand.LEFT -> {
@@ -53,7 +53,7 @@ class BoardSupervisor {
                 }
             }
             InputCommand.SPEED -> {
-                moveUserBlockDown()
+                moveUserBlockOneLineDown()
             }
             InputCommand.ROTATE -> {
                 if (isRotatePossible()){
@@ -62,6 +62,9 @@ class BoardSupervisor {
             }
             InputCommand.EXIT -> {
                 throw GameOverException()
+            }
+            InputCommand.MOVE_DOWN -> {
+                moveUserBlockAllWayDown()
             }
             else -> {
             }
@@ -91,7 +94,7 @@ class BoardSupervisor {
     }
 
 
-    private fun moveUserBlockDown(){
+    private fun moveUserBlockOneLineDown(){
         if (!checkUserBlockCanMove(userBlockPositionX+1, userBlockPositionY)){
             sealUserBlock()
             generateNewUserBlock()
@@ -162,5 +165,11 @@ class BoardSupervisor {
     private fun getRandomBLockType(): BlockType {
         val value = (0 until BlockType.values().size - 2).random()
         return BlockType.values()[value]
+    }
+
+    private fun moveUserBlockAllWayDown(){
+        while (checkUserBlockCanMove(userBlockPositionX+1, userBlockPositionY)){
+            userBlockPositionX++
+        }
     }
 }
