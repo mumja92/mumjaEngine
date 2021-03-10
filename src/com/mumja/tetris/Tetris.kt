@@ -56,7 +56,7 @@ class Tetris {
 
     private fun fillGameStatus(){
         gameStatus.board = boardSupervisor.getBoard()
-        gameStatus.nextBlock = boardSupervisor.getNextBlock()
+        gameStatus.nextUserBlock = boardSupervisor.getNextUserBlock()
         gameStatus.score = boardSupervisor.getScore()
     }
 }

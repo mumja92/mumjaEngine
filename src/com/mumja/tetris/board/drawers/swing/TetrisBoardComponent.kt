@@ -1,9 +1,7 @@
 package com.mumja.tetris.board.drawers.swing
 
 import com.mumja.tetris.GameStatus
-import com.mumja.tetris.board.BlockType
 import java.awt.Graphics
-import java.awt.Color
 import javax.swing.JComponent
 
 
@@ -36,6 +34,6 @@ internal class TetrisBoardComponent : JComponent() {
         g.drawString("Exit: ESC", shift + 10, 100)
 
         g.drawString("Score: ${gameStatus!!.score}", shift + 10, 180)
-        g.drawString("Next block: ${gameStatus!!.nextBlock.blockType}", shift + 10, 200)
+        g.drawString("Next block: ${gameStatus!!.nextUserBlock.blockType}", shift + 10, 200)
     }
 }

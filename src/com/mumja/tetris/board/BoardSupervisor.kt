@@ -7,7 +7,7 @@ class BoardSupervisor {
     private val boardSizeX = 15
     private val boardSizeY = 10
     private val board = Board(boardSizeX, boardSizeY)
-    private var nextBlock = Block(BlockType.EMPTY)
+    private var nextUserBlock = Block(getRandomBLockType(), getRandomBlockColor())
     private var score = 0
     private var userBlock = Block(BlockType.EMPTY)
     private var userBlockPositionX = 0
@@ -29,8 +29,8 @@ class BoardSupervisor {
         return board
     }
 
-    fun getNextBlock(): Block{
-        return nextBlock
+    fun getNextUserBlock(): Block{
+        return nextUserBlock
     }
 
     fun getScore(): Int{
@@ -146,7 +146,8 @@ class BoardSupervisor {
     }
 
     private fun generateNewUserBlock(){
-        userBlock = Block(getRandomBLockType(), getRandomBlockColor())
+        userBlock = nextUserBlock
+        nextUserBlock = Block(getRandomBLockType(), getRandomBlockColor())
         userBlockPositionX = 0
         userBlockPositionY = boardSizeY/2
     }
