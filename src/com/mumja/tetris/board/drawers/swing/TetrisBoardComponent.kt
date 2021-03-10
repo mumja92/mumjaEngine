@@ -21,11 +21,7 @@ internal class TetrisBoardComponent : JComponent() {
             for (x in 0 until gameStatus!!.board.sizeX) {
                 for (y in 0 until gameStatus!!.board.sizeY) {
                     val block = gameStatus!!.board.getLocation(x, y)
-                    var color = Color.BLUE
-                    if (block!!.blockType != BlockType.EMPTY) {
-                        color = Color.RED;
-                    }
-                    BlockDrawingScheme.drawRectangle(g, color, y*sizeY, x*sizeX, sizeY, sizeX)
+                    BlockDrawingScheme.drawRectangle(g, block!!.blockColor, y*sizeY, x*sizeX, sizeY, sizeX)
                 }
             }
             drawStatus(g,gameStatus!!.board.sizeY*sizeY)

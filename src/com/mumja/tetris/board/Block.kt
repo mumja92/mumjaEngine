@@ -2,6 +2,7 @@ package com.mumja.tetris.board
 
 class Block (
     var blockType: BlockType,
+    var blockColor: BlockColor = BlockColor.LIGHT_GRAY,
     rotation: Int = 0,
 ){
     var blockRotation = rotation

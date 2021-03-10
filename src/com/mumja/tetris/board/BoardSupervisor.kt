@@ -76,14 +76,14 @@ class BoardSupervisor {
             throw GameOverException()
         }
         for (point in userBlockCalculator.getBlocks(userBlock)){
-            board.setLocation(userBlockPositionX + point.first, userBlockPositionY + point.second, Block(BlockType.POINT))
+            board.setLocation(userBlockPositionX + point.first, userBlockPositionY + point.second, userBlock)
         }
     }
 
     private fun drawUserBlock(){
         val points = userBlockCalculator.getBlocks(userBlock)
         for (point in points){
-            board.setLocation(userBlockPositionX + point.first, userBlockPositionY + point.second, Block(BlockType.POINT))
+            board.setLocation(userBlockPositionX + point.first, userBlockPositionY + point.second, Block(BlockType.POINT, userBlock.blockColor))
         }
     }
 
@@ -146,13 +146,13 @@ class BoardSupervisor {
     }
 
     private fun generateNewUserBlock(){
-        userBlock = Block(getRandomBLockType(), 0)
+        userBlock = Block(getRandomBLockType(), getRandomBlockColor())
         userBlockPositionX = 0
         userBlockPositionY = boardSizeY/2
     }
 
     private fun isRotatePossible(): Boolean{
-        val rotatedBlock = Block(userBlock.blockType, userBlock.blockRotation)
+        val rotatedBlock = Block(userBlock.blockType, userBlock.blockColor, userBlock.blockRotation)
         rotatedBlock.rotate()
         for (point in userBlockCalculator.getBlocks(rotatedBlock)){
             val block = board.getLocation(userBlockPositionX + point.first, userBlockPositionY + point.second) ?: return false
@@ -166,6 +166,11 @@ class BoardSupervisor {
     private fun getRandomBLockType(): BlockType {
         val value = (0 until BlockType.values().size - 2).random()
         return BlockType.values()[value]
+    }
+
+    private fun getRandomBlockColor(): BlockColor {
+        val value = (0 until BlockColor.values().size - 1).random()
+        return BlockColor.values()[value]
     }
 
     private fun moveUserBlockAllWayDown(){
