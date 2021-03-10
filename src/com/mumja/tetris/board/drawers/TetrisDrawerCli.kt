@@ -10,7 +10,7 @@ class TetrisDrawerCli : ITetrisDrawer {
         drawBoard(gameStatus.board)
     }
 
-    override fun gameOver(){
+    override fun gameOver(gameStatus: GameStatus){
         println("Game over")
     }
 

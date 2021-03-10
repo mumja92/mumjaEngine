@@ -4,5 +4,5 @@ import com.mumja.tetris.GameStatus
 
 interface ITetrisDrawer {
     fun draw(gameStatus: GameStatus)
-    fun gameOver()
+    fun gameOver(gameStatus: GameStatus)
 }

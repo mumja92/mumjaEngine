@@ -51,7 +51,7 @@ class Tetris {
 
     private fun callGameOver()
     {
-        tetrisDrawer!!.gameOver()
+        tetrisDrawer!!.gameOver(gameStatus)
     }
 
     private fun fillGameStatus(){

@@ -24,8 +24,8 @@ class TetrisDrawerSwing: ITetrisDrawer {
         frame.repaint()
     }
 
-    override fun gameOver() {
-        JOptionPane.showMessageDialog(null, "GG medium", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+    override fun gameOver(gameStatus: GameStatus) {
+        JOptionPane.showMessageDialog(null, "Score: ${gameStatus.score}", "Game Over", JOptionPane.INFORMATION_MESSAGE);
         frame.dispose()
     }
 

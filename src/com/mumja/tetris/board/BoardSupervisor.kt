@@ -122,6 +122,7 @@ class BoardSupervisor {
     private fun removeFullLines(){
         for (i in 1 until boardSizeX){
             if (lineIsFull(i)){
+                score++
                 moveBoardOneLineDown(i)
             }
         }
