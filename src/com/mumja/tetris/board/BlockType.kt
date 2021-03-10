@@ -1,8 +1,6 @@
 package com.mumja.tetris.board
 
 enum class BlockType {
-    EMPTY,
-    POINT,
     I,
     O,
     T,
@@ -10,4 +8,6 @@ enum class BlockType {
     Z,
     J,
     L,
+    EMPTY,
+    POINT,
 }

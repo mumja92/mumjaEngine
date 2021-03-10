@@ -129,7 +129,7 @@ class BoardSupervisor {
     }
 
     private fun generateNewUserBlock(){
-        userBlock = Block(BlockType.I, 0)
+        userBlock = Block(getRandomBLockType(), 0)
         userBlockPositionX = 0
         userBlockPositionY = boardSizeY/2
     }
@@ -144,5 +144,10 @@ class BoardSupervisor {
             }
         }
         return true
+    }
+
+    private fun getRandomBLockType(): BlockType {
+        val value = (0 until BlockType.values().size - 2).random()
+        return BlockType.values()[value]
     }
 }
