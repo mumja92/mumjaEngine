@@ -1,6 +1,7 @@
 package com.mumja.tetris.board.drawers.swing
 
 import com.mumja.tetris.GameStatus
+import com.mumja.tetris.board.UserBlockCalculator
 import java.awt.Graphics
 import javax.swing.JComponent
 
@@ -9,6 +10,7 @@ internal class TetrisBoardComponent : JComponent() {
     private var gameStatus: GameStatus? = null
     private val sizeX = 40
     private val sizeY = 40
+    private val userBlockCalculator = UserBlockCalculator()
 
     fun setStatus(status: GameStatus){
         gameStatus = status
@@ -33,7 +35,12 @@ internal class TetrisBoardComponent : JComponent() {
         g.drawString("Rotate: R", shift + 10, 80)
         g.drawString("Exit: ESC", shift + 10, 100)
 
-        g.drawString("Score: ${gameStatus!!.score}", shift + 10, 180)
-        g.drawString("Next block: ${gameStatus!!.nextUserBlock.blockType}", shift + 10, 200)
+        val secondShift = 300
+        val xShift = shift + sizeX*3
+        g.drawString("Score: ${gameStatus!!.score}", shift + 10, secondShift - sizeY * 2)
+        g.drawString("Next Block:", shift + 10, secondShift)
+        for (point in userBlockCalculator.getBlocks(gameStatus!!.nextUserBlock)){
+            BlockDrawingScheme.drawRectangle(g, gameStatus!!.nextUserBlock.blockColor, xShift + point.second*sizeY, secondShift + point.first * sizeX, sizeY, sizeX)
+        }
     }
 }
