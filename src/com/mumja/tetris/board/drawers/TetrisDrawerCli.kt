@@ -1,12 +1,13 @@
 package com.mumja.tetris.board.drawers
 
+import com.mumja.tetris.GameStatus
 import com.mumja.tetris.board.BlockType
 import com.mumja.tetris.board.Board
 
-class BoardDrawerCli : IBoardDrawer {
-    override fun draw(board: Board){
+class TetrisDrawerCli : ITetrisDrawer {
+    override fun draw(gameStatus: GameStatus){
         clearScreen()
-        drawBoard(board)
+        drawBoard(gameStatus.board)
     }
 
     override fun gameOver(){

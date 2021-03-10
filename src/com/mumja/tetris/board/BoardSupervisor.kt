@@ -7,6 +7,8 @@ class BoardSupervisor {
     private val boardSizeX = 15
     private val boardSizeY = 10
     private val board = Board(boardSizeX, boardSizeY)
+    private var nextBlock = Block(BlockType.EMPTY)
+    private var score = 0
     private var userBlock = Block(BlockType.EMPTY)
     private var userBlockPositionX = 0
     private var userBlockPositionY = 0
@@ -16,12 +18,23 @@ class BoardSupervisor {
         generateNewUserBlock()
     }
 
-    fun nextFrame(input: InputCommand, nextTick: Boolean = true): Board{
+    fun nextFrame(input: InputCommand, nextTick: Boolean = true){
         unDrawUserBlock()
         removeFullLines()
         moveUserBlock(input, nextTick)
         drawUserBlock()
-        return board;
+    }
+
+    fun getBoard(): Board{
+        return board
+    }
+
+    fun getNextBlock(): Block{
+        return nextBlock
+    }
+
+    fun getScore(): Int{
+        return score
     }
 
     private fun moveUserBlock(input: InputCommand, nextTick:Boolean){
